@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">YellowNotes</string>
+    <string name="title_activity_main">YellowNotes</string>
+    <string name="package_name">com.YellowNotes.app</string>
+    <string name="custom_url_scheme">com.YellowNotes.app</string>
+</resources>

@@ -1,0 +1,107 @@
+<!-- ==============================
+1. Home page
+2. Button: "Add new note"
+3. Button: "Done"
+4. Color picker
+5. Button: "Delete"
+============================== -->
+
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, viewport-fit=cover"
+		/>
+		<title>YellowNotes</title>
+		<link rel="stylesheet" href="/styles/main.css" />
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<!-- Main page -->
+		<div class="app-container">
+			<header class="app-header">
+				<div class="header-content">
+					<div class="search-bar">
+						<span class="material-icons">search</span>
+						<input type="text" placeholder="Поиск заметок..." />
+					</div>
+				</div>
+			</header>
+			<main class="notes-container" id="notes-container"></main>
+			<!-- Button: "Add new note" -->
+			<button id="add-note-btn" class="fab">
+				<span class="material-icons">add</span>
+			</button>
+			<div class="modal" id="note-modal">
+				<div class="modal-content">
+					<div class="modal-header">
+						<input
+							type="text"
+							id="note-title"
+							placeholder="Заголовок"
+							class="modal-input"
+						/>
+						<!-- Button: "Done" -->
+						<button class="icon-button" id="save-note-btn">
+							<span class="material-icons">done</span>
+						</button>
+					</div>
+					<textarea
+						id="note-content"
+						placeholder="Ваша заметка..."
+						class="modal-textarea"
+					></textarea>
+					<!-- Color picker -->
+					<div class="modal-actions">
+						<div class="color-picker">
+							<div
+								class="color-option"
+								data-color="#4285F4"
+								style="background-color: #4285f4"
+							></div>
+							<div
+								class="color-option"
+								data-color="#EA4335"
+								style="background-color: #ea4335"
+							></div>
+							<div
+								class="color-option"
+								data-color="#FBBC05"
+								style="background-color: #fbbc05"
+							></div>
+							<div
+								class="color-option"
+								data-color="#34A853"
+								style="background-color: #34a853"
+							></div>
+							<div
+								class="color-option"
+								data-color="#673AB7"
+								style="background-color: #673ab7"
+							></div>
+							<div
+								class="color-option"
+								data-color="#FF9800"
+								style="background-color: #ff9800"
+							></div>
+						</div>
+						<!-- Button: "Delete" -->
+						<button id="delete-note-btn" class="icon-button">
+							<span class="material-icons">delete</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="module" src="/src/notes.js"></script>
+	</body>
+</html>

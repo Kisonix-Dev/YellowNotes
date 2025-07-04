@@ -1,0 +1,539 @@
+/* ==============================
+1. General
+2. Status bar background 
+3. Search 
+4. Notes 
+5. Button: "Create new note" 
+6. Modal 
+7. Color picker 
+8. Icon button: "Exit" 
+9. Empty page
+10. Media 
+11. Note checkbox
+============================== */
+
+/* ============= General ============= */
+:root {
+	--sat: env(safe-area-inset-top);
+	--sar: env(safe-area-inset-right);
+	--sab: env(safe-area-inset-bottom);
+	--sal: env(safe-area-inset-left);
+	--primary-color: #fcd741;
+	--secondary-color: #f3c921;
+	--text-color: #202124;
+	--light-text: #5f6368;
+	--bg-color: #ffffff;
+	--surface-color: #ffffff;
+	--hover-color: #f1f3f4;
+	--elevation-1: 0 1px 2px 0 rgba(60, 64, 67, 0.3),
+		0 1px 3px 1px rgba(60, 64, 67, 0.15);
+	--elevation-2: 0 1px 2px 0 rgba(60, 64, 67, 0.3),
+		0 2px 6px 2px rgba(60, 64, 67, 0.15);
+	--elevation-fab: 0 1px 3px 0 rgba(60, 64, 67, 0.302),
+		0 4px 8px 3px rgba(60, 64, 67, 0.149);
+	--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Roboto', sans-serif;
+	user-select: none;
+	outline: none !important;
+	-webkit-tap-highlight-color: transparent !important;
+	--transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+	background-color: #f5f5f5;
+	color: var(--text-color);
+	line-height: 1.5;
+}
+
+/* ============= Status bar background ============= */
+body::before {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: var(--sat, 0px);
+	background-color: #fcd741;
+	z-index: 1000;
+}
+
+.app-container {
+	overflow: hidden;
+	max-width: 100%;
+	margin: 0 auto;
+	min-height: 100vh;
+	position: relative;
+}
+
+.app-header {
+	padding-top: calc(8px + var(--sat, 0px));
+	padding-left: calc(16px + var(--sal, 0px));
+	padding-right: calc(16px + var(--sar, 0px));
+	height: calc(64px + var(--sat, 0px));
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: #fcd741;
+	z-index: 100;
+	padding: 8px 16px;
+	box-shadow: var(--elevation-1);
+	display: flex;
+	align-items: center;
+}
+
+.header-content {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: #fcd741;
+}
+
+.app-header h1 {
+	font-size: 1.375rem;
+	font-weight: 500;
+	color: var(--text-color);
+	margin-right: 16px;
+}
+
+/* ============= Search ============= */
+
+.search-bar {
+	flex-grow: 1;
+	max-width: 720px;
+	width: 100%;
+	height: 48px;
+	background-color: #f1f3f4;
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	padding: 0 16px;
+	transition: var(--transition);
+	margin: 0 auto;
+}
+
+.search-bar:hover {
+	background-color: #e8eaed;
+}
+
+.search-bar input {
+	flex-grow: 1;
+	border: none;
+	background: transparent;
+	padding: 12px;
+	font-size: 1rem;
+	outline: none;
+	width: 100%;
+}
+
+.search-bar .material-icons {
+	color: #5f6368;
+	margin-right: 8px;
+	flex-shrink: 0;
+}
+
+/* ============= Notes ============= */
+
+.notes-container {
+	margin-top: 64px;
+	padding: 16px;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+	gap: 16px;
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.note-card {
+	background-color: var(--surface-color);
+	border-radius: 8px;
+	padding: 16px;
+	box-shadow: var(--elevation-1);
+	transition: var(--transition);
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+	min-height: 120px;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #e0e0e0;
+}
+
+.note-card:hover {
+	box-shadow: var(--elevation-2);
+}
+
+.note-card::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 4px;
+}
+
+.edit-note-btn {
+	margin-right: 8px;
+	position: static;
+	background: none;
+	border: none;
+	color: #5f6368;
+	cursor: pointer;
+	padding: 5%;
+	left: 10px;
+	border-radius: 50%;
+}
+
+.edit-note-btn:hover {
+	background-color: rgba(95, 99, 104, 0.1);
+}
+
+.note-actions {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.note-title {
+	font-size: 1rem;
+	margin-bottom: 12px;
+	font-weight: 500;
+	color: var(--text-color);
+}
+
+.note-content {
+	flex-grow: 1;
+	color: var(--light-text);
+	font-size: 0.875rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 6;
+	-webkit-box-orient: vertical;
+}
+
+.note-date {
+	margin-top: 12px;
+	font-size: 0.75rem;
+	color: var(--light-text);
+}
+
+/* ============= Button: "Create new note" ============= */
+
+.fab {
+	bottom: calc(24px + var(--sab, 0px));
+	right: calc(24px + var(--sar, 0px));
+	position: fixed;
+	bottom: 24px;
+	width: 56px;
+	height: 56px;
+	border-radius: 50%;
+	background-color: var(--primary-color);
+	color: white;
+	border: none;
+	box-shadow: var(--elevation-fab);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 90;
+	transition: var(--transition);
+}
+
+.fab:hover {
+	background-color: #f9cc1a;
+	box-shadow: 0 1px 5px 0 rgba(60, 64, 67, 0.302),
+		0 4px 12px 4px rgba(60, 64, 67, 0.149);
+}
+
+.fab .material-icons {
+	font-size: 24px;
+}
+
+/* ============= Modal ============= */
+
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.3s ease, visibility 0.3s ease;
+	transition: var(--transition);
+}
+
+.modal.show {
+	opacity: 1;
+	visibility: visible;
+}
+
+.modal-content {
+	background-color: white;
+	border-radius: 12px;
+	width: 90%;
+	max-width: 600px;
+	max-height: 80vh;
+	overflow-y: auto;
+	transform: translateY(20px);
+	transition: transform 0.3s ease;
+	will-change: transform;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	transition: var(--transition);
+	display: flex;
+	flex-direction: column;
+}
+
+.modal-body {
+	padding: 0;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.modal.show .modal-content {
+	transform: translateY(0);
+}
+
+.modal:not(.show) .modal-content {
+	transform: translateY(20px);
+}
+
+.modal-content {
+	scroll-behavior: smooth;
+	-webkit-overflow-scrolling: touch;
+}
+
+.modal-header {
+	padding: 16px;
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-input {
+	width: 100%;
+	border: none;
+	font-size: 1.25rem;
+	font-weight: 500;
+	padding: 16px;
+	outline: none;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-textarea {
+	width: 100%;
+	padding: 16px;
+	border: none;
+	font-size: 1rem;
+	resize: none;
+	outline: none;
+	line-height: 1.5;
+	min-height: 200px;
+	flex-grow: 1;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.modal-actions {
+	padding: 8px 16px;
+	display: flex;
+	align-items: center;
+	border-top: 1px solid #e0e0e0;
+	justify-content: space-between;
+	gap: 8px;
+}
+
+/* ============= Color picker ============= */
+
+.color-picker {
+	margin-right: auto;
+	display: flex;
+	gap: 8px;
+}
+
+.color-option {
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: var(--transition);
+	border: 2px solid transparent;
+}
+
+.color-option:hover {
+	transform: scale(1.1);
+}
+
+.color-option.selected {
+	border-color: var(--text-color);
+	transform: scale(1.1);
+}
+
+/* ============= Icon button: "Exit" ============= */
+
+.icon-button {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--light-text);
+	transition: var(--transition);
+}
+
+.icon-button:hover {
+	background-color: var(--hover-color);
+}
+
+/* ============= Empty page ============= */
+
+.empty-state {
+	text-align: center;
+	color: var(--light-text);
+	padding: 80px 20px;
+	grid-column: 1 / -1;
+}
+
+.empty-state .material-icons {
+	font-size: 48px;
+	margin-bottom: 16px;
+	color: #dadce0;
+}
+
+.empty-state p {
+	font-size: 1rem;
+	color: var(--light-text);
+}
+
+/* ============= Media ============= */
+
+@media (max-width: 600px) {
+	.app-header {
+		height: calc(56px + var(--sat, 0px));
+		padding: calc(4px + var(--sat, 0px)) 8px 4px;
+	}
+
+	.header-content {
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-start;
+		height: 100%;
+	}
+
+	.app-header h1 {
+		display: none;
+	}
+
+	.search-bar {
+		width: 100%;
+		margin-left: 8px;
+	}
+
+	.notes-container {
+		margin-top: calc(56px + var(--sat, 0px));
+		grid-template-columns: 1fr;
+		padding: 16px;
+	}
+
+	.fab {
+		bottom: calc(16px + var(--sab, 0px));
+		right: calc(16px + var(--sar, 0px));
+	}
+
+	.note-card {
+		min-height: auto;
+	}
+}
+
+@media (max-width: 600px) {
+	.app-header {
+		padding-top: calc(4px + var(--sat, 0px));
+		padding-left: calc(8px + var(--sal, 0px));
+		padding-right: calc(8px + var(--sar, 0px));
+		height: calc(56px + var(--sat, 0px));
+	}
+
+	.fab {
+		bottom: calc(16px + var(--sab, 0px));
+		right: calc(16px + var(--sar, 0px));
+	}
+
+	.notes-container {
+		padding-left: calc(16px + var(--sal, 0px));
+		padding-right: calc(16px + var(--sar, 0px));
+	}
+}
+
+/* ============= Note checkbox ============= */
+
+.note-checkbox {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	z-index: 1;
+}
+
+.note-checkbox .material-icons {
+	font-size: 18px;
+	color: #333;
+}
+
+.note-header {
+	padding-right: 30px;
+}
+
+.delete-selected-btn {
+	display: none;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	margin: 10px auto;
+	margin-left: 10px;
+	padding: 8px 16px;
+	background-color: #ff4444;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 14px;
+	transition: background-color 0.2s;
+}
+
+.delete-selected-btn:hover {
+	background-color: #cc0000;
+}
+
+.note-card {
+	position: relative;
+}
