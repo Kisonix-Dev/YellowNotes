@@ -23,8 +23,8 @@ The application is developed using the following technologies:
 
 ## 📱 Screenshots
 
-<img src="#" width="300" />
-<img src="#" width="300" />
+<img src="https://github.com/Kisonix-Dev/YellowNotes/blob/main/.github/img/1.jpg?raw=true" width="300" />
+<img src="https://github.com/Kisonix-Dev/YellowNotes/blob/main/.github/img/2.jpg?raw=true" width="300" />
 
 ## 📖 Documentation
 
